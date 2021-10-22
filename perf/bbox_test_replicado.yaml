@@ -1,7 +1,7 @@
 config:
   environments:
     node:
-      target: 'http://localhost:5555/node'
+      target: 'http://localhost:5555/nodes'
       plugins:
         statsd:
           host: localhost
@@ -11,17 +11,20 @@ config:
   pool: 50 # All HTTP requests from all virtual users will be sent over the same connections
 
   phases:
+    - name: Start
+      duration: 10
+      arrivalRate: 0
     - name: Ramp
-      duration: 10
-      arrivalRate: 5
+      duration: 120
+      arrivalRate: 1
       rampTo: 30
-    - name: Plain
+    - name: Finish
       duration: 10
-      arrivalRate: 2
+      arrivalRate: 0
     
 
 scenarios:
-  - name: Ping
+  - name: Bbox
     flow:
       - get:
-          url: '/ping'
+          url: '/bbox2'

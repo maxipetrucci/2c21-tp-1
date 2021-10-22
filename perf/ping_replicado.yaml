@@ -1,7 +1,7 @@
 config:
   environments:
     node:
-      target: 'http://localhost:5555/node'
+      target: 'http://localhost:5555/nodes'
       plugins:
         statsd:
           host: localhost
@@ -11,13 +11,16 @@ config:
   pool: 50 # All HTTP requests from all virtual users will be sent over the same connections
 
   phases:
+    - name: Warm up
+      duration: 30
+      arrivalRate: 5
     - name: Ramp
-      duration: 10
+      duration: 40
       arrivalRate: 5
       rampTo: 30
-    - name: Plain
-      duration: 10
-      arrivalRate: 2
+    - name: High Load
+      duration: 60
+      arrivalRate: 30
     
 
 scenarios:
