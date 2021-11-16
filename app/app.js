@@ -11,7 +11,7 @@ app.get('/ping', (request, response) => {
 
 app.get("/load", (req, res) => {
     let start = new Date();
-    while ( ( (new Date().getTime() - start.getTime() ) / 1000 ) < 3);
+    while ( ( (new Date().getTime() - start.getTime() ) / 1000 ) < 5);
     res.status(200).send('Work done!\n');
 });
 
